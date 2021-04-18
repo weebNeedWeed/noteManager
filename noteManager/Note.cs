@@ -15,6 +15,10 @@ namespace noteManager
             if (!File.Exists(this.Filename))
             {
                 Hashtable data = new Hashtable();
+
+                data.Add("test", "test2");
+                data.Add("test2", "test3");
+
                 string jsonData = JsonSerializer.Serialize(data);
                 File.WriteAllText(this.Filename, jsonData);
             }
