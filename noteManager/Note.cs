@@ -31,5 +31,36 @@ namespace noteManager
 
             return notes;
         }
+
+        public void AddNote(string noteId, string noteContent)
+        {
+            Hashtable notes = this.GetAllNotes();
+            notes.Add(noteId, noteContent);
+
+            string jsonData = JsonSerializer.Serialize(notes);
+
+            File.WriteAllText(this.Filename, jsonData);
+        }
+
+        public void RemoveNote(string noteId)
+        {
+            Hashtable notes = this.GetAllNotes();
+            notes.Remove(noteId);
+
+            string jsonData = JsonSerializer.Serialize(notes);
+
+            File.WriteAllText(this.Filename, jsonData);
+        }
+        public void EditNote(string noteId, string noteContent)
+        {
+            Hashtable notes = this.GetAllNotes();
+            if (notes.ContainsKey(noteId))
+            {
+                notes[noteId] = noteContent;
+                string jsonData = JsonSerializer.Serialize(notes);
+
+                File.WriteAllText(this.Filename, jsonData);
+            }
+        }
     }
 }
